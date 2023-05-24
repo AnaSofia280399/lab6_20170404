@@ -1,0 +1,67 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de hospitales</title>
+    <div th:insert="~{fragments/general.html :: estilo}"></div>
+</head>
+<body>
+<div class="container">
+    <div th:insert="~{fragments/general.html :: header}"></div>
+    <div id="content">
+        <main>
+            <!-- Contenido -->
+        <div class="page-header text-center">
+            <h2 th:text="${estudiante.id == 0? 'Nuevo Estudiante' : 'Editar Estudiante'}"></h2>
+        </div>
+        <div class="container-fluid">
+                <form method="POST"  class="row g-3" th:object="${estudiante}" th:action="@{/estudiante/guardar}">
+                    <div class="form-group">
+                        <label for="nombres">Nombre</label>
+                        <input type="text" class="form-control" th:classappend="${#fields.hasErrors('nombres')?'is-invalid':''}" id="nombres" name="nombres" th:field="*{nombres}" >
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('nombres')}" th:errors="*{nombres}">Error</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="apellidos">Apellidos</label>
+                        <input type="text" class="form-control" th:classappend="${#fields.hasErrors('apellidos')?'is-invalid':''}" id="apellidos" name="apellidos" th:field="*{apellidos}" >
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('apellidos')}" th:errors="*{apellidos}">Error</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="dni">DNI</label>
+                        <input type="number"   class="form-control" th:classappend="${#fields.hasErrors('dni')?'is-invalid':''}" id="dni" name="dni" th:field="*{dni}"></input>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}">Error</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="edad">Edad</label>
+                        <input type="text" class="form-control" th:classappend="${#fields.hasErrors('edad')?'is-invalid':''}" id="edad" name="edad" th:field="*{edad}" >
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('edad')}" th:errors="*{edad}">Error</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="correo">Correo</label>
+                        <input type="text" class="form-control" th:classappend="${#fields.hasErrors('correo')?'is-invalid':''}" id="correo" name="correo"  th:field="*{correo}">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('correo')}" th:errors="*{correo}">Error</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label th:type="${estudiante.id == 0? 'password' : 'hidden'}" for="password">Contraseña</label>
+                        <input th:type="${estudiante.id == 0? 'password' : 'hidden'}" class="form-control" th:classappend="${#fields.hasErrors('password')?'is-invalid':''}" id="password" name="password"  th:field="*{password}">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Error</div>
+                    </div>
+
+                    <input type="hidden" th:field="*{rolid}"   />
+
+
+                    <input type="hidden" th:field="*{id}" th:if="${estudiante.id > 0}" />
+
+                    <div class="form-group">
+                        <a th:href="@{/estudiante/lista}" class="btn btn-danger">Cancelar</a>
+                        <button type="submit" class="btn btn-primary" th:text="${estudiante.id == 0? 'Registrar' : 'Actualizar'}">Reg/act</button>
+                    </div>
+                </form>
+        </div>
+        </main>
+    </div>
+            <!-- /Contenido -->
+</div>
+
+</body>
+</html>

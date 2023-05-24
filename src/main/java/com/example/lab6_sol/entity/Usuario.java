@@ -1,6 +1,8 @@
 package com.example.lab6_sol.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
 
 @Entity
 @Table(name = "usuario")
@@ -11,13 +13,18 @@ public class Usuario {
     @Column(nullable = false)
     private int id;
 
+
+
     @Column(nullable = false)
+    @Length(min = 3, max = 100)
     private String nombres;
 
+    @Length(min = 3, max = 100)
     @Column(nullable = false)
     private String apellidos;
 
     @Column(nullable = false)
+    @Range(min = 0, max = 1000000000)
     private String dni;
 
     @Column(nullable = false)
